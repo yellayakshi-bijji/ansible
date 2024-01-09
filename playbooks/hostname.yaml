@@ -1,0 +1,8 @@
+---
+
+- name: Getting Server Hostnames
+  hosts: all
+
+  tasks:
+   - name: Task 1 - Get Server Hostname
+     command: hostname
