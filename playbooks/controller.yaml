@@ -1,0 +1,10 @@
+---
+- name: Install Packages on Controller Group
+  hosts: Controller
+  
+  tasks:
+   - name: Install postgresql server
+     yum:
+      name: postgresql-server
+      state: latest
+      update_cache: yes
