@@ -1,6 +1,7 @@
 ---
 - name: Install Packages on WebServer Groups 	#play name
   hosts: web_servers				#hosts belonging to the group loadbalancer
+  become: yes                                   #to escalate privileges
   
   tasks:
    - name: Install Nginx			#task name
