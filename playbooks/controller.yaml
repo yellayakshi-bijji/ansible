@@ -4,8 +4,29 @@
   become: yes
   
   tasks:
+   - name: Include tasks.yaml
+     include_tasks: tasks.yaml
+     tags:
+      - include_tasks
+
    - name: Install latest version of Apache
      yum:
       name: httpd
       state: latest
       update_cache: yes
+     tags:
+      - install_apache
+     notify: restart apache
+
+   - name: Start Apache Service
+     service:
+      name: httpd
+      state: started
+     tags:
+      - start_apache
+
+  handlers:
+   - name: restart apache
+     service:
+      name: httpd
+      state: restarted

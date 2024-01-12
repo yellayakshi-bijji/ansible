@@ -1,11 +1,16 @@
 ---
-- name: Install Packages on WebServer Groups 	#play name
+- name: Install Packages on WebServer Groups	#play name
   hosts: web_servers				#hosts belonging to the group loadbalancer
   become: yes                                   #to escalate privileges
   
   tasks:
-   - name: Install Nginx			#task name
+   - name: Install Packages			#task name
      yum:					#module name
-      name: nginx				#argument:value
-      state: present				#when you specify state: present, it means you want the specified resource to be in the desired state on the target system. If the resource is not present, Ansible will take action to ensure it is.
+      name: "{{item}}"				#argument:value
+      state: latest				#when you specify state: present, it means you want the specified resource to be in the desired state on the target system. If the resource is not present, Ansible will take action to ensure it is.
       update_cache: yes
+     with_items:				#looping elements
+      - nginx
+      - python3-boto3
+      - ansible
+      - python3-pip
